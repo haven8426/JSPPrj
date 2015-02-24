@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="reset.css" rel="stylesheet" type="text/css" />
+<link href="gallery.css" rel="stylesheet" type="text/css" />
+<script>
+	function picClick(){
+		var img =document.createElement("img");
+		img.src = event.target.src;
+		img.style.height = "0px";
+		
+		var showBox = document.querySelector(".gallery-show-box");
+		var last;
+		while (last = showBox.lastChild)
+			showBox.removeChild(last);
+
+		showBox.appendChild(img);
+		animateTo(img,"height","250px",1000,linear);
+		event.preventDefault();
+	}
+	window.addEventListener("load", function() {
+
+		//var pic1 = document.querySelector("#gallery-pic1");
+		var pics = document.querySelector(".gallery-pic-list");
+
+		var fileButton = document.querySelector(".file-button");
+
+		var prev = document.querySelector(".gallery-btn-prev");
+		var next = document.querySelector(".gallery-btn-next");
+
+		//pic1.addEventListener("click", view, false); 
+		pics.addEventListener("click", picClick, false);
+
+		fileButton.addEventListener("click", function() {
+			var event = new MouseEvent("click", {
+				'view' : window,
+				'bubbles' : true,
+				'cancelable' : true
+			});
+			/* var event = document.createEvent("MouseEvent");
+			event.initEvent("click", true, true); //event type, bubbles, cancelable */
+
+			var file = document.querySelector(".gallery-file");
+			file.dispatchEvent(event);
+		});
+
+		prev.addEventListener("click", function() {
+			animateTo(pics, "left", "-120px", 2000, speed);
+		});
+		next.addEventListener("click", function() {
+			animateTo(pics, "left", "120px", 3000, linear);
+		});
+
+	});
+
+	/* function view() {
+
+		var showBox = document.querySelector(".gallery-show-box");
+
+		/* alert(event.currentTarget.tagName);   
+		event.preventDefault(); 
+
+		if (event.target.tagName != "IMG")
+			return;
+
+		var img = document.createElement("img");
+		img.src = event.target.src;
+		/* img.addEventListener("show", function(e){
+		   alert("show Show SHOW !!!");
+		   //alert(e.detail);
+		}); 
+
+		var last;
+		while (last = showBox.lastChild)
+			showBox.removeChild(last);
+
+		showBox.appendChild(img);
+
+	}
+ */
+	/* function animateBy(target, property, by, duration, easing) {
+		if (target.style[property] == "")
+			target.style[property] = "0px";
+
+		var from = parseInt(target.style[property]);
+		var by = parseInt(by);
+		by = by + from;
+
+		//현재 시간 값을 받아옴
+		var start = new Date;
+
+		var id = setInterval(
+				function() {
+					/* 애니메이션을 위한 프레임 연산 */
+					/*   from += 1*(to < from ? -1 : 1); 
+					var timePassed = new Date - start;
+					var progress = timePassed / duration;
+
+					if (progress > 1)
+						progress = 1;
+					// to-from : 변화될 값 , from 현재 값
+					if (easing)
+						target.style[property] = (from + (by - from)
+								* easing(progress))
+								+ "px";
+					else
+						starget.style[property] = (from + (by - from)
+								* progress)
+								+ "px";
+					if (progress == 1)
+						clearInterval(id);
+				}, 10);
+	} */
+ 	function animateTo(target, property, to, duration, easing) {
+		if (target.style[property] == "")
+			target.style[property] = "0px";
+
+		var from = parseInt(target.style[property]);
+		var to = parseInt(to);
+		//to = to + from;
+
+		//현재 시간 값을 받아옴
+		var start = new Date;
+
+		var id = setInterval(
+				function() {
+					/* 애니메이션을 위한 프레임 연산 */
+					/*   from += 1*(to < from ? -1 : 1); */
+					var timePassed = new Date - start;
+					var progress = timePassed / duration;
+
+					if (progress > 1)
+						progress = 1;
+					// to-from : 변화될 값 , from 현재 값
+					if (easing){
+						target.style[property] = (from + (to - from)
+								* easing(progress))
+								+ "px";
+							
+					}	
+					else
+						starget.style[property] = (from + (to - from)
+								* progress)
+								+ "px";
+					if (progress == 1)
+						clearInterval(id);
+				}, 10);
+	}
+	function speed(progress) {
+		return Math.pow(progress, 2);
+	}
+	function linear(progress){
+		return progress;
+	}
+</script>
+</head>
+<body>
+	<div class="gallery">
+		<div class="gallery-show-box"></div>
+		<div class="gallery-list-box">
+			<div class="gallery-btn-prev">◀</div>
+			<div class="gallery-pic-clipper">
+				<ul class="gallery-pic-list">
+					<li class="gallery-pic-item thumbnail"><img
+						class="gallery-pic" id="gallery-pic1" src="image1.png" /></li>
+					<li class="gallery-pic-item thumbnail"><img
+						class="gallery-pic" id="gallery-pic2" src="image2.png" /></li>
+					<li class="gallery-pic-item thumbnail"><img
+						class="gallery-pic" id="gallery-pic3" src="image3.png" /></li>
+					<li class="gallery-pic-item thumbnail"><img
+						class="gallery-pic" id="gallery-pic4" src="image4.png" /></li>
+					<li class="gallery-pic-item thumbnail"><img
+						class="gallery-pic" id="gallery-pic5" src="image5.png" /></li>
+					<li class="gallery-pic-item thumbnail"><img
+						class="gallery-pic" id="gallery-pic1" src="image1.png" /></li>
+					<li class="gallery-pic-item thumbnail"><img
+						class="gallery-pic" id="gallery-pic2" src="image2.png" /></li>
+					<li class="gallery-pic-item thumbnail"><img
+						class="gallery-pic" id="gallery-pic3" src="image3.png" /></li>
+					<li class="gallery-pic-item thumbnail"><img
+						class="gallery-pic" id="gallery-pic4" src="image4.png" /></li>
+					<li class="gallery-pic-item thumbnail"><img
+						class="gallery-pic" id="gallery-pic5" src="image5.png" /></li>
+					<li class="gallery-pic-item thumbnail"><img
+						class="gallery-pic" id="gallery-pic1" src="image1.png" /></li>
+					<li class="gallery-pic-item thumbnail"><img
+						class="gallery-pic" id="gallery-pic2" src="image2.png" /></li>
+					<li class="gallery-pic-item thumbnail"><img
+						class="gallery-pic" id="gallery-pic3" src="image3.png" /></li>
+					<li class="gallery-pic-item thumbnail"><img
+						class="gallery-pic" id="gallery-pic4" src="image4.png" /></li>
+					<li class="gallery-pic-item thumbnail"><img
+						class="gallery-pic" id="gallery-pic5" src="image5.png" /></li>
+					<li class="gallery-pic-item thumbnail"><img
+						class="gallery-pic" id="gallery-pic1" src="image1.png" /></li>
+					<li class="gallery-pic-item thumbnail"><img
+						class="gallery-pic" id="gallery-pic2" src="image2.png" /></li>
+					<li class="gallery-pic-item thumbnail"><img
+						class="gallery-pic" id="gallery-pic3" src="image3.png" /></li>
+					<li class="gallery-pic-item thumbnail"><img
+						class="gallery-pic" id="gallery-pic4" src="image4.png" /></li>
+					<li class="gallery-pic-item thumbnail"><img
+						class="gallery-pic" id="gallery-pic5" src="image5.png" /></li>
+				</ul>
+			</div>
+			<div class="gallery-btn-next">▶</div>
+		</div>
+	</div>
+	<div>
+		<input type="file" class="gallery-file" /> <span class="file-button">파일선택</span>
+	</div>
+</body>
+</html>

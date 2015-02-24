@@ -1,0 +1,23 @@
+@CHARSET "UTF-8";
+body
+{
+	/* <<글꼴 설정>> */
+	font-family: 돋움 ,Dotum ,sans-serif;			
+	 /*<< 글씨의 크기 설정>> */
+	font-size: 75%;  
+	/*<< 글줄 간격 설정>> */    
+	line-height: 1.5;		
+	/* <<배경이미지 넣기>> */
+	background-image: url(bg.jpg);
+	/*<< body 글자 색깔(밝은 회색) >>*/		
+	color: #ececec;		
+	/* <<body 요소의 배경 이미지 사이즈를 cover로 설정>> */
+	background-size : cover; 
+}
+
+/* 글머리설정 */
+h1,h2		
+{
+	/* <<글자색>> */
+	color: #3fb8eb;		
+}
