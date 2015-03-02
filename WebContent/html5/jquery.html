@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.text {
+	display: inline-block;; background : yellow;
+	width: 500px;
+	height: 200px;
+	background: yellow;
+}
+
+.text1 {
+	border: 1px solid black;
+}
+</style>
+<script src="../js/jquery-2.1.3.js"></script>
+<script>
+	/* 
+	1.속성변경
+	2.노드선택
+	3.이벤트
+	4.스타일변경
+	5.노드조작
+	6.애니메이션
+	7.AJAX */
+
+	//1속성변경
+	
+	window.onload = function () {
+		//var btnAttr = document.getElementById("btn-attr");
+		//var txt1 = document.getElementById("text1");
+		
+		//1.속성변셩
+		// txt1.value = "hello" ; txt2객체가 가지는 속성을 사용하는 방법
+		//jQuery 객체가 제공하는 방식으로 속성을 변셩
+		//javascript-->jQuery-->Dom
+		//txt1 = jQuery(txt1);
+		//txt1 = $(txt1);
+		var txt1 = $("#text1");
+		var btnAttr = $("#btn-attr");
+		//txt.value 는 쓸수 없다.
+		txt1.attr("value", "hello");
+		//btnAtt.attr("value","변경");
+		/* btnAttr.bind("click",function(){
+			alert("hello");
+		}); */
+		btnAttr.click(function(){
+			/* alert($("#gender").prop("checked")); */
+			//alert($("#gender").val());
+			//alert($("#name").html());
+			$("#name").toggleClass("text1");
+		});
+		$("#btn-tr").click(function(){
+			alert("Triger");
+			$("#btn-attr").trigger("click");
+		}) 
+		
+		/* $("input").on("click",function(){
+			alert("opqr");
+			var input = document.createElement("input");
+			
+		}); */
+		$("#name").addClass("test");
+		
+		$("#btn-css").click(function(){
+			$("#name").css({
+				opacity:0.3,
+				width : "300px",
+				height : "300px"
+				});
+		});
+		$("#btn-pos").click(function(){
+			var offs = $("#item").position();
+			alert("left :" +offs.left+ ",top :" +offs.top);
+		});
+		
+		$("#btn-mnp").click(function(){
+			var img = $("<img />");
+			img.attr("src" , "image1.png");
+			img.appendTo("#box");
+			img.css({
+				width:"100px",
+				height:"100px:"
+			});
+			img.animate({
+				width:"300px",
+				height:"300px:"	
+			},3000 ,function(){
+				$("#box").append("hello");
+			})
+			.animate({
+				width:"+=100px"
+			},1000, function(){
+				$("#box").empty();
+			});
+		
+			//$("#box").append(img);
+		});
+	}
+</script>
+</head>
+<body>
+	<p>
+		<input id="btn-attr" type="button" value="속성변경" /> 
+		<input id="btn-tr" type="button" value="트리거" /> 
+		<input id="btn-css" type="button" value="스타일변경" /> 
+		<input id="btn-pos" type="button" value="위치확인" />
+		<input id="btn-mnp" type="button" value="이미지생성" />
+	</p>
+	<p>
+		<input type="text" id="text1" /> 
+		<input type="radio" id="gender" value="남성" checked="checked" /> 남성 <span class="text" id="name"><b>James</b></span>
+	</p>
+	<div id="box" style= "width: 500px; height: 400px; background: yellow; position: relative;">
+		<div id="item" style="width: 500px; height: 400px; background: yellow; position: relative;">
+			<div id="item" style="width: 100px; height: 100px; background: blue; position: absolute; top: 50px; left: 50px">
+			</div>
+		</div>
+	</div>
+</body>
+</html>

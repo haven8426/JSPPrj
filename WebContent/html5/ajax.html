@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	window.onload = function(){
+		var btnRequest = document.querySelector("#btn-Request");
+		var page=1;
+		btnRequest.onclick = function(){
+			
+			var oReq = new XMLHttpRequest();
+			   if (oReq) {
+				   
+				   	 oReq.onreadystatechange = function(){
+				   		 if(oReq.readyState == 4){
+				   			var data = eval(oReq.responseText);
+						     alert(data[1].title);
+				   		 }
+				   		
+				   	 }
+				      oReq.open("GET", "data.jsp?="+page, true);
+				      oReq.send();
+			   } 
+		}
+	}
+</script>
+</head>
+<body>
+	<input type="button" value="요청" id="btn-Request" />
+</body>
+</html>
